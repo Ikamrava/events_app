@@ -7,7 +7,7 @@ function CategoryPage({data}) {
   console.log(data)
 const eventsOnCity = data.map(item=>{
     return (
-      <Link href={`./events/${item.id}`} >
+      <Link href={`./${item.city}/${item.id}`} >
       <h2>{item.title}</h2>
       <p>{item.city}</p>
       <img src ={item.image} className={styles.mainImgs} alt="Picture of the author"></img>

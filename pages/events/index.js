@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
-import styles from '/styles/Home.module.css'
+
+
 
 function EventsPage({data}) {
    
@@ -9,7 +10,7 @@ function EventsPage({data}) {
       
       <Link href={`./events/${item.id}`} className={styles.atags}>
       <h2>{item.title}</h2>
-      <img src ={item.image} className={styles.mainImgs}></img>
+      <img src ={item.image} className={styles.eventsImages}></img>
       </Link>
     )
    })
