@@ -1,24 +1,31 @@
 import Link from 'next/link'
 import React from 'react'
-import styles from '/styles/Home.module.css'
+import styles from "/styles/Home.module.css"
+
 
 
 function Home({data}) {
     const eventsTitle = data.map(item=>{
     return (
-      <Link href={`./events/${item.id.toLowerCase()}`}>
-      <h2>{item.title}</h2>
-      <img src ={item.image} className={styles.mainImgs}  alt="Picture of the author"></img>
-      <h4>{item.description}</h4>
-      </Link>
+      <div className={styles.home_body}>
+        
+        <Link className={styles.card} href={`./events/${item.id.toLowerCase()}`}>
+          <div className={styles.image_wrapper}>
+             <img className={styles.main_page_images} src ={item.image}   alt="Picture of the author"></img>
+          </div>
+          <div className={styles.text_wrapper}>
+            <h2>{item.title}</h2>
+            <h4>{item.description}</h4>
+          </div>
+          
+        </Link>
+      </div>
     )
   })
   return (
-    <main className={styles.main}>
-      <div className={styles.body}>
+    <main >
         {eventsTitle}
-      </div>
-    </main>
+      </main>
   )
 }
 

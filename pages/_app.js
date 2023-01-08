@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import "../styles/Home.module.css"
 import MainLayout from '../src/componnents/MainLayout'
 import Head from 'next/head'
 
@@ -13,7 +14,10 @@ export default function App({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
      <MainLayout>
-       <Component {...pageProps} />
+      <main>
+        <Component {...pageProps} />
+      </main>
+       
      </MainLayout>
      
   </>

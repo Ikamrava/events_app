@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import styles from '/styles/Home.module.css'
+
 
 
 function CategoryPage({data}) {
@@ -10,7 +10,7 @@ const eventsOnCity = data.map(item=>{
       <Link href={`./${item.city}/${item.id}`} >
       <h2>{item.title}</h2>
       <p>{item.city}</p>
-      <img src ={item.image} className={styles.mainImgs} alt="Picture of the author"></img>
+      <img src ={item.image}  alt="Picture of the author"></img>
       <h4>{item.description}</h4>
       </Link>
     )

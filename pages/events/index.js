@@ -8,9 +8,9 @@ function EventsPage({data}) {
   const eventsTitle = data.map(item=>{
     return (
       
-      <Link href={`./events/${item.id}`} className={styles.atags}>
+      <Link href={`./events/${item.id}`} >
       <h2>{item.title}</h2>
-      <img src ={item.image} className={styles.eventsImages}></img>
+      <img src ={item.image}></img>
       </Link>
     )
    })
