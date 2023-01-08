@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
-import Image from "next/image"
+import Link from 'next/link'
+
 
 
 
@@ -12,12 +13,11 @@ export default function Home({data}) {
 
   const eventsTitle = data.map(item=>{
     return (
-      
-      <a href={`./events/${item.id}`} className={styles.atags}>
+      <Link href={`./events/${item.id.toLowerCase()}`}>
       <h2>{item.title}</h2>
       <img src ={item.image}  className={styles.mainImgs} alt="Picture of the author"></img>
       <h4>{item.description}</h4>
-      </a>
+      </Link>
     )
   })
 
@@ -55,10 +55,11 @@ export default function Home({data}) {
 
 export async function getServerSideProps(){
   const {events_categories} = await import("./data/data.json")
-  console.log(events_categories)
+  
   return{
     props:{
       data:events_categories
     }
   }
 }
+
