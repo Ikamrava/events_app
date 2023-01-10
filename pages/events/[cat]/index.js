@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
+import styles from "/styles/Home.module.css"
 
 
 
@@ -7,20 +8,26 @@ function CategoryPage({data}) {
   console.log(data)
 const eventsOnCity = data.map(item=>{
     return (
-      <Link href={`./${item.city}/${item.id}`} >
-      <h2>{item.title}</h2>
-      <p>{item.city}</p>
-      <img src ={item.image}  alt="Picture of the author"></img>
-      <h4>{item.description}</h4>
+      <div className={styles.home_body}>
+      <Link className={styles.card} href={`./${item.city}/${item.id}`} >
+     
+      <div className={styles.image_wrapper}>
+      <img src ={item.image} className={styles.main_page_images} alt="Picture of the author"></img>
+      </div>
+       <div className={styles.text_wrapper}>
+         <h2>{item.title}</h2>
+         <p className={styles.city_name}>{item.city}</p>
+         <h4>{item.description}</h4>
+      </div>
+      
       </Link>
+      </div>
     )
   })
 
   return (
     <div>
-      <h1>Events bsed on cities</h1>
       {eventsOnCity}
-      <a href='/events/london/ev1'>ev1</a>
     </div>
   )
 }

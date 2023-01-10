@@ -17,7 +17,6 @@ function Home({data}) {
             <h2>{item.title}</h2>
             <h4>{item.description}</h4>
           </div>
-          
         </Link>
       </div>
     )

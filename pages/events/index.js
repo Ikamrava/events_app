@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
+import styles from "/styles/Home.module.css"
+
 
 
 
@@ -8,16 +10,21 @@ function EventsPage({data}) {
   const eventsTitle = data.map(item=>{
     return (
       
-      <Link href={`./events/${item.id}`} >
-      <h2>{item.title}</h2>
-      <img src ={item.image}></img>
-      </Link>
+      <div>
+        <Link className={styles.card_events} href={`./events/${item.id}`} >
+          <div className={styles.image_wrapper}>
+            <img className={styles.main_page_images} src ={item.image}></img>
+          </div>
+          <div className={styles.text_wrapper_event}>
+            <h2>{item.title}</h2>
+          </div>
+        </Link>
+      </div>
     )
    })
 
   return (
-    <div>
-      <h1>Events Page</h1>
+    <div className={styles.home_body_events}>
       {eventsTitle}
     </div>
   )
