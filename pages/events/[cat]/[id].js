@@ -5,13 +5,10 @@ function EventPage({data}) {
 
   return (
     <div>
-      Ours single event
-    
       <h2>{data.title}</h2>
       <p>{data.city}</p>
-      <img src ={data.image} className={styles.mainImgs} alt="Picture of the author"></img>
+      <img src ={data.image}  alt="Picture of the author"></img>
       <h4>{data.description}</h4>
-      
     </div>
   )
 }
