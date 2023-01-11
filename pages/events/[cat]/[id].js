@@ -1,14 +1,51 @@
-import React from 'react'
+import { useRouter } from 'next/router';
+import React, { useRef } from 'react'
 import styles from '/styles/Home.module.css'
 
 function EventPage({data}) {
 
+  const inputEmail = useRef();
+  const router = useRouter()
+
+
+  async function emailsubmit(e){
+    e.preventDefault()
+    const emailValue = inputEmail.current.value
+    const eventId = router ?.query.id
+    try{
+      const response = await fetch("/api/emailRegistration" , {
+        method: "POST",
+        headers:{
+          "Content-Type":"application/json",
+        },
+        body:JSON.stringify({email:emailValue,eventId})
+      })
+      if(!response.ok)throw new Error(response.status)
+      const data = await response.json()
+      
+
+    }catch(e){
+      console.log(e)
+    }
+
+
+  }
+
+
   return (
-    <div>
+    <div className={styles.singleEventWrapper}>
       <h2>{data.title}</h2>
       <p>{data.city}</p>
-      <img src ={data.image}  alt="Picture of the author"></img>
+      <img src ={data.image} className={styles.singleEventPhoto}  alt="Picture of the author"></img>
       <h4>{data.description}</h4>
+      <form onSubmit={emailsubmit} className= {styles.form}>
+          <div className={styles.inputWrapper}>
+          <label className={styles.label}>Register for the Event!</label>
+          <input ref ={inputEmail}type="email" placeholder='Input Your Email'></input>
+          </div>
+          <button>Submit</button>
+      </form>
+     
     </div>
   )
 }
