@@ -1,65 +1,31 @@
-import Link from 'next/link'
-import React from 'react'
-import styles from "/styles/Home.module.css"
+import CatEvent from '../../../src/components/events/catEvent';
 
+const EventsCatPage = ({ data, pageName }) => <CatEvent data={data} pageName={pageName} />;
 
+export default EventsCatPage;
 
-function CategoryPage({data}) {
-  console.log(data)
-const eventsOnCity = data.map(item=>{
-    return (
-      <div className={styles.home_body}>
-      <Link className={styles.card} href={`./${item.city}/${item.id}`} >
-     
-      <div className={styles.image_wrapper}>
-      <img src ={item.image} className={styles.main_page_images} alt="Picture of the author"></img>
-      </div>
-       <div className={styles.text_wrapper}>
-         <h2>{item.title}</h2>
-         <p className={styles.city_name}>{item.city}</p>
-         <h4>{item.description}</h4>
-      </div>
-      
-      </Link>
-      </div>
-    )
-  })
-
-  return (
-    <div>
-      {eventsOnCity}
-    </div>
-  )
-}
-
-export default CategoryPage
-
-export async function getStaticPaths(){
-const {events_categories} = await import("/pages/data/data.json")
-const allpaths = events_categories.map(item=>{
+export async function getStaticPaths() {
+  const { events_categories } = await import('/data/data.json');
+  const allPaths = events_categories.map((ev) => {
+    return {
+      params: {
+        cat: ev.id.toString(),
+      },
+    };
+  });
+  console.log(allPaths);
   return {
-        params:{
-          cat: item.id.toString()
-        }
-      }
-})
-  console.log(allpaths)
-  return{
-    paths: allpaths,
-    fallback:false
-    
-  }
-
+    paths: allPaths,
+    fallback: false,
+  };
 }
 
+export async function getStaticProps(context) {
+  console.log(context);
+  const id = context?.params.cat;
+  const { allEvents } = await import('/data/data.json');
 
-export async function getStaticProps(context){
-const {allEvents} = await import("/pages/data/data.json")
-const id = context.params.cat
-const data = allEvents.filter(item=>item.city.toLowerCase()===id)
-  return{
-    props:{data}
-    
-  }
+  const data = allEvents.filter((ev) => ev.city === id);
 
+  return { props: { data, pageName: id } };
 }
